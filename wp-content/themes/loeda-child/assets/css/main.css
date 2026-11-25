@@ -132,14 +132,14 @@ body.admin-bar .loeda-header { top: 32px; }
 .guia { display: grid; gap: var(--space-md); align-content: start; min-width: 0; }
 .guia__img { display: block; border-radius: var(--space-xs); overflow: hidden; aspect-ratio: 3 / 2; background: var(--color-paper-3); }
 .guia__img img { width: 100%; height: 100%; object-fit: cover; }
-.guia h3 { font-size: var(--text-xl); line-height: 1.15; }
-.guia h3 a { text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size var(--dur-short) var(--ease-out); }
-.guia:hover h3 a, .guia h3 a:focus-visible { background-size: 100% 1px; }
+.guia :is(h2, h3) { font-size: var(--text-xl); line-height: 1.15; }
+.guia :is(h2, h3) a { text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size var(--dur-short) var(--ease-out); }
+.guia:hover h3 a, .guia :is(h2, h3) a:focus-visible { background-size: 100% 1px; }
 .guia p { max-width: 42ch; color: var(--color-muted); }
 .s-noche .guia p, .s-oliva .guia p { color: inherit; opacity: 0.88; }
 .meta { display: flex; flex-wrap: wrap; gap: var(--space-md); font-size: var(--text-sm); color: var(--color-muted); }
 .guia--grande { grid-column: 1 / -1; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-xl); align-items: center; }
-.guia--grande h3 { font-size: var(--text-section); line-height: 1.05; }
+.guia--grande :is(h2, h3) { font-size: var(--text-section); line-height: 1.05; }
 .guia--grande .guia__img { aspect-ratio: 16 / 10; }
 @media (max-width: 60rem) { .guias { grid-template-columns: repeat(2, minmax(0, 1fr)); } .guia--grande { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 40rem) { .guias { grid-template-columns: minmax(0, 1fr); } }
@@ -321,7 +321,7 @@ html.edad-abierta .cookies { display: none; }
 .wp-block-woocommerce-product-details .wc-tabs li a, .woocommerce-tabs ul.tabs li a { opacity: 1 !important; color: inherit !important; }
 
 @media (max-width: 75rem) { .guias { grid-template-columns: repeat(2, minmax(0, 1fr)); } .loeda-footer .cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 40rem) { .guias { grid-template-columns: minmax(0, 1fr); } .guia h3 { font-size: var(--text-lg); } .loeda-footer .cols { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 40rem) { .guias { grid-template-columns: minmax(0, 1fr); } .guia :is(h2, h3) { font-size: var(--text-lg); } .loeda-footer .cols { grid-template-columns: minmax(0, 1fr); } }
 
 /* índice del blog en dos columnas: pocas palabras por pantalla */
 .blog-lista .guias { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2xl) var(--gap-columns); }
@@ -750,11 +750,11 @@ body:not(.home) main#main, body:not(.home) .wp-site-blocks > main { background: 
 .guia__img { border-radius: 0; background: var(--pizarra); }
 .guia__img img { transition: transform var(--dur-long) var(--ease-out); }
 .guia:hover .guia__img img { transform: scale(1.04); }
-.guia h3 { font-size: 0.95rem; line-height: 1.35; color: rgb(255 255 255 / 0.94); }
+.guia :is(h2, h3) { font-size: 0.95rem; line-height: 1.35; color: rgb(255 255 255 / 0.94); }
 .guia p, .s-noche .guia p, .s-oliva .guia p { color: var(--texto); font-weight: 300; font-size: 0.9375rem; opacity: 1; }
 .guia--grande { align-items: stretch; }
 .guia--grande > div { align-self: center; padding: var(--space-xl); }
-.guia--grande h3 { font-size: clamp(1.15rem, 1.3vw + 0.8rem, 1.7rem); line-height: 1.25; }
+.guia--grande :is(h2, h3) { font-size: clamp(1.15rem, 1.3vw + 0.8rem, 1.7rem); line-height: 1.25; }
 .guia--grande .guia__img { aspect-ratio: auto; min-height: 340px; }
 .blog-lista .guias { gap: var(--space-xl) var(--space-lg); }
 
@@ -990,3 +990,9 @@ h1, h2, h3, h4, h5, h6, .gcard__tit, .gcard__sub, .panel__n, .premio h3, .premio
 .premio__sello i { font-style: normal; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 4px; }
 @media (max-width: 75rem) { .premios-grid--top { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 40rem) { .premio--grande { grid-template-columns: 6rem minmax(0, 1fr); padding: var(--space-md); } .premio__sello b { font-size: 1.2rem; } }
+
+/* títulos de bloques de WordPress (p. ej. "Productos relacionados"): mismo tamaño que el resto de h2, para que no desborden en 320 px */
+h2.wp-block-heading, .wp-block-woocommerce-related-products h2 { font-size: clamp(1.1rem, 1vw + 0.9rem, 1.6rem); line-height: 1.22; }
+
+.nw { white-space: nowrap; }
+@media (max-width: 30rem) { .premio h3 { font-size: 0.72rem; letter-spacing: 0.06em; } }
