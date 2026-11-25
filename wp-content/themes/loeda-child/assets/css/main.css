@@ -7,6 +7,7 @@
 /* Hallmark · waive 49b · a real phrase that cannot shorten: the guides' headlines are the article titles and wrap to two lines at desktop widths · los titulares de las guías enlazan el artículo y no se pueden acortar sin perder el tema */
 /* Hallmark · waive 71 · the index rows are ruled lines, not stacked paragraphs: each head is a row label and the space above and below it is the row's own padding · filas de índice tipo guía de campo */
 /* Hallmark · answered F19 · solo dos familias por encargo de la marca: Cochin para cabeceras y Roboto (300, 400, 500) para subtítulos y texto */
+/* Hallmark · waive 50b · by request: ninguna cabecera puede partir una palabra a mitad ("RECONOCIMIENTO / S"); se usa overflow-wrap normal y el tamaño se ajusta, nunca break-word */
 
 html, body { overflow-x: clip; }
 body { margin: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-md); line-height: 1.6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
@@ -15,7 +16,7 @@ img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 :focus-visible { outline: 2px solid var(--color-focus, var(--color-olive-deep)); outline-offset: 3px; }
 ::selection { background: var(--color-gold); color: var(--color-night); }
-h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 300; font-synthesis: none; letter-spacing: var(--tracking-display); text-wrap: balance; overflow-wrap: break-word; min-width: 0; margin: 0; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 300; font-synthesis: none; letter-spacing: var(--tracking-display); text-wrap: balance; overflow-wrap: normal; word-break: normal; hyphens: manual; min-width: 0; margin: 0; }
 p { margin: 0; text-wrap: pretty; }
 
 .loeda-skip { position: absolute; left: var(--space-md); top: -100px; z-index: var(--z-modal); background: var(--color-gold); color: var(--color-night); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-card); }
@@ -974,3 +975,18 @@ body.woocommerce-cart main#main, body.woocommerce-checkout main#main, body.wooco
 @media (max-width: 40rem) { .premio { grid-template-columns: 5.5rem minmax(0, 1fr); gap: var(--space-md); padding: var(--space-md); } .premios-otros .fila { grid-template-columns: minmax(0, 1fr); } }
 .premios-hero h1 { max-width: 16ch; overflow-wrap: normal; hyphens: none; font-size: clamp(1.7rem, 3.4vw, 3.4rem); }
 @media (max-width: 60rem) { .premios-hero h1 { max-width: none; font-size: clamp(1.5rem, 6.4vw, 2.2rem); } }
+
+/* ---------- ninguna palabra se parte a mitad, en ninguna cabecera ni título ---------- */
+h1, h2, h3, h4, h5, h6, .gcard__tit, .gcard__sub, .panel__n, .premio h3, .premio__vino, .fila h3, .feat h3, .woocommerce-loop-product__title, .loeda-det summary, .faq summary, .toc strong, .toc summary, .btn, .cats a, .tienda-cats a { overflow-wrap: normal !important; word-break: normal !important; hyphens: manual !important; }
+@media (max-width: 40rem) { :root { --tracking-cab: 0.09em; } h1, h2, h3, h4, .escenario h2, .feat h3 { letter-spacing: 0.09em; } }
+
+/* premios: Decanter destacado */
+.premios-grid--top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.premio--grande { grid-template-columns: 10rem minmax(0, 1fr); padding: var(--space-xl); background: linear-gradient(135deg, rgb(255 228 144 / 0.10), rgb(255 255 255 / 0.04) 55%); border-color: rgb(255 228 144 / 0.28); }
+.premio--grande h3 { font-size: 0.9375rem; }
+.premio--grande .premio__vino { font-size: 1.125rem; }
+.premio__sello { display: grid; place-content: center; text-align: center; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #ffe9a8, #d9a93a 62%, #a67a1c); color: var(--color-night); box-shadow: inset 0 0 0 5px rgb(255 255 255 / 0.28), inset 0 0 0 6px rgb(3 31 41 / 0.35), 0 14px 22px rgb(0 0 0 / 0.4); }
+.premio__sello b { font-family: var(--font-display); font-size: 1.9rem; line-height: 1; letter-spacing: 0.04em; }
+.premio__sello i { font-style: normal; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 4px; }
+@media (max-width: 75rem) { .premios-grid--top { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 40rem) { .premio--grande { grid-template-columns: 6rem minmax(0, 1fr); padding: var(--space-md); } .premio__sello b { font-size: 1.2rem; } }
