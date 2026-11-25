@@ -941,3 +941,36 @@ body.woocommerce-cart main#main, body.woocommerce-checkout main#main, body.wooco
 .tienda-cats ul { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-lg); list-style: none; margin: 0 0 var(--space-xl); padding: 0; }
 .tienda-cats a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.875rem; font-weight: 400; color: var(--texto); text-decoration: none; border-bottom: 1px solid transparent; }
 .tienda-cats a:hover, .tienda-cats a[aria-current] { color: var(--color-gold); border-bottom-color: var(--color-gold); }
+
+/* ---------- premios: hero con todas las medallas y una ficha por medalla ---------- */
+.premios-hero { position: relative; min-height: 100svh; display: grid; align-items: end; overflow: clip; padding-block: 140px var(--space-3xl); background: radial-gradient(60% 55% at 72% 46%, rgb(255 228 144 / 0.22) 0%, rgb(255 228 144 / 0.06) 38%, transparent 70%), radial-gradient(90% 70% at 15% 100%, #0a4458 0%, transparent 60%), var(--pizarra); }
+.premios-hero::before { content: ""; position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 72% 46%, rgb(255 228 144 / 0.05) 0deg 3deg, transparent 3deg 12deg); mask: radial-gradient(circle at 72% 46%, #000 0%, transparent 62%); -webkit-mask: radial-gradient(circle at 72% 46%, #000 0%, transparent 62%); pointer-events: none; }
+.premios-hero__medallas { position: absolute; inset: 0; }
+.premios-hero__m { position: absolute; left: var(--x); top: var(--y); width: var(--s); height: auto; aspect-ratio: 1; transform: translate(-50%, -50%) rotate(var(--r)); filter: drop-shadow(0 22px 28px rgb(0 0 0 / 0.5)) drop-shadow(0 0 22px rgb(255 228 144 / 0.12)); animation: medalla-flota 7s ease-in-out infinite; animation-delay: calc(var(--i) * -0.9s); }
+.premios-hero__m:nth-child(odd) { animation-duration: 8.5s; }
+@keyframes medalla-flota { 0%, 100% { transform: translate(-50%, -50%) rotate(var(--r)); } 50% { transform: translate(-50%, calc(-50% - 12px)) rotate(calc(var(--r) + 2.5deg)); } }
+.premios-hero__txt { position: relative; z-index: 2; }
+.premios-hero h1 { font-size: clamp(2rem, 4.4vw, 4.2rem); max-width: 11ch; line-height: 1.12; letter-spacing: var(--tracking-cab); color: #fff; }
+.premios-hero__txt p { margin-top: var(--space-lg); max-width: 40ch; font-size: 1.0625rem; font-weight: 300; line-height: 1.6; color: rgb(255 255 255 / 0.82); }
+@media (max-width: 60rem) {
+	.premios-hero { align-items: start; padding-top: 120px; }
+	.premios-hero__medallas { inset: auto 0 0 0; height: 56%; }
+	.premios-hero__txt { align-self: start; }
+	.premios-hero__m { width: calc(var(--s) * 0.62); }
+}
+@media (prefers-reduced-motion: reduce) { .premios-hero__m { animation: none; } }
+.premios-grid { list-style: none; margin: var(--space-xl) 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
+.premio { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: var(--space-lg); align-items: start; padding: var(--space-lg); border-radius: 20px; }
+.premio > img { width: 100%; height: auto; aspect-ratio: 1; filter: drop-shadow(0 12px 18px rgb(0 0 0 / 0.4)); }
+.premio h3 { font-size: 0.8125rem; line-height: 1.4; color: rgb(255 255 255 / 0.94); margin: 0; }
+.premio__vino { margin-top: var(--space-xs); font-size: 1rem; font-weight: 500; color: #fff; }
+.premio__medalla { display: inline-block; margin-left: var(--space-xs); padding: 2px 10px; border-radius: 999px; background: var(--color-gold); color: var(--color-night); font-size: 0.75rem; font-weight: 500; vertical-align: 1px; }
+.premio p { font-size: 0.9375rem; font-weight: 300; line-height: 1.6; color: var(--texto); margin-top: var(--space-xs); }
+.premio .premio__vino { color: #fff; font-weight: 500; }
+.premio__puntos strong { font-weight: 500; color: #fff; margin-right: var(--space-2xs); }
+.premio__fuente { font-size: 0.8125rem; margin-top: var(--space-sm); color: var(--suave); }
+.premios-otros .fila { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); }
+@media (max-width: 75rem) { .premios-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 40rem) { .premio { grid-template-columns: 5.5rem minmax(0, 1fr); gap: var(--space-md); padding: var(--space-md); } .premios-otros .fila { grid-template-columns: minmax(0, 1fr); } }
+.premios-hero h1 { max-width: 16ch; overflow-wrap: normal; hyphens: none; font-size: clamp(1.7rem, 3.4vw, 3.4rem); }
+@media (max-width: 60rem) { .premios-hero h1 { max-width: none; font-size: clamp(1.5rem, 6.4vw, 2.2rem); } }
